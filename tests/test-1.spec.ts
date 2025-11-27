@@ -1,0 +1,54 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://yeetcommerce.com/');
+  const page1Promise = page.waitForEvent('popup');
+  await page.getByRole('link', { name: 'Create My Free Store' }).click();
+  const page1 = await page1Promise;
+  await page1.getByRole('button', { name: 'Login' }).click();
+  await page1.getByRole('textbox', { name: 'Email*' }).click();
+  await page1.getByRole('textbox', { name: 'Email*' }).fill('');
+  await page1.getByRole('textbox', { name: 'Email*' }).press('CapsLock');
+  await page1.getByRole('textbox', { name: 'Email*' }).fill('umemusfirahh@gmail.com');
+  await page1.getByRole('textbox', { name: 'Password*' }).click();
+  await page1.getByRole('textbox', { name: 'Password*' }).fill('Musfi@next');
+  await page1.getByRole('button', { name: 'Login' }).click();
+  await page1.getByRole('textbox').nth(2).click();
+  await page1.getByRole('textbox').nth(2).fill('1');
+  await page1.getByRole('textbox').nth(3).fill('3');
+  await page1.getByRole('textbox').nth(4).fill('9');
+  await page1.getByRole('textbox').nth(5).fill('3');
+  await page1.getByRole('textbox').nth(2).fill('4');
+  await page1.getByRole('textbox').nth(3).fill('4');
+  await page1.getByRole('textbox').nth(4).fill('0');
+  await page1.getByRole('textbox').nth(5).fill('8');
+  await page1.locator('#add-new-dropDown').click();
+  await page1.getByRole('button', { name: 'Add New Order' }).click();
+  await page1.getByRole('button', { name: '+ Add Cart Items' }).click();
+  await page1.locator('.productGrayBox').click();
+  await page1.locator('.productSkuWhiteBox > button').click();
+  await page1.getByRole('button', { name: 'Done' }).click();
+  await page1.getByText('Search and select a customer').click();
+  await page1.getByText('Add New Customer').click();
+  await page1.getByRole('textbox', { name: 'First Name *' }).click();
+  await page1.getByRole('textbox', { name: 'First Name *' }).fill('John');
+  await page1.getByRole('textbox', { name: 'Last Name *' }).click();
+  await page1.getByRole('textbox', { name: 'Last Name *' }).fill('Ally');
+  await page1.getByRole('textbox', { name: 'Email *' }).click();
+  await page1.getByRole('textbox', { name: 'Email *' }).fill('johnally@gmail.com');
+  await page1.getByRole('textbox', { name: 'Password *' }).click();
+  await page1.getByRole('textbox', { name: 'Password *' }).fill('johnally');
+  await page1.locator('#mobile-no-field').getByRole('button', { name: 'Country Code Selector' }).click();
+  await page1.getByText('▲Afghanistan (‫افغانستان‬‎) +').click();
+  await page1.locator('#mobile-no-field').getByRole('button', { name: 'Country Code Selector' }).click();
+  page1.once('dialog', dialog => {
+    console.log(`Dialog message: ${dialog.message()}`);
+    dialog.dismiss().catch(() => {});
+  });
+  await page1.getByText('▲Afghanistan (‫افغانستان‬‎) +').dblclick();
+  page1.once('dialog', dialog => {
+    console.log(`Dialog message: ${dialog.message()}`);
+    dialog.dismiss().catch(() => {});
+  });
+  await page1.getByText('▲Afghanistan (‫افغانستان‬‎) +').dblclick();
+});
